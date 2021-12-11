@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{877C68EE-7186-452D-A838-99BF1240A8E5}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.19041.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;widgets</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>5.12.10_msvc2017_64</QtInstall>
+    <QtModules>
+    </QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\yangguang\source\repos\QtApplication1\QtApplication1\fftw;C:\Users\yangguang\source\repos\QtApplication1\QtApplication1\fftw-3.3.5-dll64;D:\python39\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\python39\libs;C:\Users\yangguang\source\repos\QtApplication1V1\QtApplication1\fftw;C:\Users\yangguang\source\repos\QtApplication1V1\QtApplication1\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>python39.lib;libfftw3-3.lib
+;libfftw3f-3.lib;
+libfftw3l-3.lib;
+ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Dll1.h" />
+    <QtMoc Include="widget.h" />
+    <QtMoc Include="mymessagebox.h" />
+    <QtMoc Include="appinit.h" />
+    <ClInclude Include="CACfig_v4.h" />
+    <ClInclude Include="CarrierSynchronizer.h" />
+    <ClInclude Include="CoarseFrequencyCompensator.h" />
+    <ClInclude Include="coder_array.h" />
+    <ClInclude Include="detect_recognize.h" />
+    <ClInclude Include="detect_recognize_data.h" />
+    <ClInclude Include="detect_recognize_initialize.h" />
+    <ClInclude Include="detect_recognize_rtwutil.h" />
+    <ClInclude Include="detect_recognize_terminate.h" />
+    <ClInclude Include="detect_recognize_types.h" />
+    <ClInclude Include="eml_setop.h" />
+    <ClInclude Include="fft.h" />
+    <ClInclude Include="FFTImplementationCallback.h" />
+    <ClInclude Include="fftshift.h" />
+    <ClInclude Include="fftw3.h" />
+    <ClInclude Include="findpeaks.h" />
+    <ClInclude Include="FIRDecimator.h" />
+    <ClInclude Include="firstfunction2.h" />
+    <ClInclude Include="function_1.h" />
+    <ClInclude Include="hilbert.h" />
+    <ClInclude Include="ifft.h" />
+    <ClInclude Include="main_suibian.h" />
+    <ClInclude Include="MC_cumulants1ccode.h" />
+    <ClInclude Include="newprojectshicenew2ccode.h" />
+    <ClInclude Include="ProcessConstructorArguments.h" />
+    <ClInclude Include="RaisedCosineReceiveFilter.h" />
+    <ClInclude Include="relop.h" />
+    <ClInclude Include="rtGetInf.h" />
+    <ClInclude Include="rtGetNaN.h" />
+    <ClInclude Include="rtwtypes.h" />
+    <ClInclude Include="rt_defines.h" />
+    <ClInclude Include="rt_nonfinite.h" />
+    <ClInclude Include="signal_num_detect_v2.h" />
+    <ClInclude Include="sort.h" />
+    <ClInclude Include="sortIdx.h" />
+    <ClInclude Include="SymbolSynchronizer.h" />
+    <ClInclude Include="SystemProp.h" />
+    <ClInclude Include="tmwtypes.h" />
+    <ClInclude Include="Ymaxccode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="appinit.cpp" />
+    <ClCompile Include="CACfig_v4.cpp" />
+    <ClCompile Include="CarrierSynchronizer.cpp" />
+    <ClCompile Include="CoarseFrequencyCompensator.cpp" />
+    <ClCompile Include="detect_recognize.cpp" />
+    <ClCompile Include="detect_recognize_data.cpp" />
+    <ClCompile Include="detect_recognize_initialize.cpp" />
+    <ClCompile Include="detect_recognize_rtwutil.cpp" />
+    <ClCompile Include="detect_recognize_terminate.cpp" />
+    <ClCompile Include="eml_setop.cpp" />
+    <ClCompile Include="fft.cpp" />
+    <ClCompile Include="FFTImplementationCallback.cpp" />
+    <ClCompile Include="fftshift.cpp" />
+    <ClCompile Include="findpeaks.cpp" />
+    <ClCompile Include="FIRDecimator.cpp" />
+    <ClCompile Include="firstfunction2.cpp" />
+    <ClCompile Include="function_1.cpp" />
+    <ClCompile Include="hilbert.cpp" />
+    <ClCompile Include="ifft.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MC_cumulants1ccode.cpp" />
+    <ClCompile Include="mymessagebox.cpp" />
+    <ClCompile Include="newprojectshicenew2ccode.cpp" />
+    <ClCompile Include="ProcessConstructorArguments.cpp" />
+    <ClCompile Include="RaisedCosineReceiveFilter.cpp" />
+    <ClCompile Include="relop.cpp" />
+    <ClCompile Include="rtGetInf.cpp" />
+    <ClCompile Include="rtGetNaN.cpp" />
+    <ClCompile Include="rt_nonfinite.cpp" />
+    <ClCompile Include="signal_num_detect_v2.cpp" />
+    <ClCompile Include="sort.cpp" />
+    <ClCompile Include="sortIdx.cpp" />
+    <ClCompile Include="SymbolSynchronizer.cpp" />
+    <ClCompile Include="SystemProp.cpp" />
+    <ClCompile Include="widget.cpp" />
+    <ClCompile Include="Ymaxccode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="mymessagebox.ui" />
+    <QtUic Include="widget.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="qss.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="css\index.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Dll1.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
