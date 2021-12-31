@@ -26,6 +26,8 @@ public:
 
     int func1();
 
+    
+
     int funcPage2();
 
     int funcPage3();
@@ -61,7 +63,7 @@ private slots:
 
     void on_pushButton_5_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_arbitrarySignalGenerate_LaunchBtn_clicked();
 
     void on_LTErunButton_clicked();
 
@@ -73,9 +75,19 @@ private slots:
 
     void on_pushButton_19_clicked();
 
+    void on_equalSignalRx_clicked();
+
     void on_singleDeviceSweep_Button_clicked();
 
     void on_singleDeviceSweep_LaunchBtn_clicked();
+
+    void on_singleDeviceSweep_TimeTestBtn_clicked();
+
+    void on_singleDeviceSweep_StartSweep_clicked();
+
+    void on_averageSweep_clicked();
+
+    void on_contSweep_clicked();
 
   
 private:

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Widget_t {
-    QByteArrayData data[28];
-    char stringdata0[608];
+    QByteArrayData data[33];
+    char stringdata0[780];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,14 +52,19 @@ QT_MOC_LITERAL(16, 291, 23), // "on_pushButton_2_clicked"
 QT_MOC_LITERAL(17, 315, 23), // "on_pushButton_3_clicked"
 QT_MOC_LITERAL(18, 339, 23), // "on_pushButton_4_clicked"
 QT_MOC_LITERAL(19, 363, 23), // "on_pushButton_5_clicked"
-QT_MOC_LITERAL(20, 387, 23), // "on_pushButton_6_clicked"
-QT_MOC_LITERAL(21, 411, 23), // "on_LTErunButton_clicked"
-QT_MOC_LITERAL(22, 435, 23), // "on_pushButton_7_clicked"
-QT_MOC_LITERAL(23, 459, 23), // "on_pushButton_8_clicked"
-QT_MOC_LITERAL(24, 483, 24), // "on_pushButton_20_clicked"
-QT_MOC_LITERAL(25, 508, 24), // "on_pushButton_19_clicked"
-QT_MOC_LITERAL(26, 533, 35), // "on_singleDeviceSweep_Button_c..."
-QT_MOC_LITERAL(27, 569, 38) // "on_singleDeviceSweep_LaunchBt..."
+QT_MOC_LITERAL(20, 387, 44), // "on_arbitrarySignalGenerate_La..."
+QT_MOC_LITERAL(21, 432, 23), // "on_LTErunButton_clicked"
+QT_MOC_LITERAL(22, 456, 23), // "on_pushButton_7_clicked"
+QT_MOC_LITERAL(23, 480, 23), // "on_pushButton_8_clicked"
+QT_MOC_LITERAL(24, 504, 24), // "on_pushButton_20_clicked"
+QT_MOC_LITERAL(25, 529, 24), // "on_pushButton_19_clicked"
+QT_MOC_LITERAL(26, 554, 24), // "on_equalSignalRx_clicked"
+QT_MOC_LITERAL(27, 579, 35), // "on_singleDeviceSweep_Button_c..."
+QT_MOC_LITERAL(28, 615, 38), // "on_singleDeviceSweep_LaunchBt..."
+QT_MOC_LITERAL(29, 654, 40), // "on_singleDeviceSweep_TimeTest..."
+QT_MOC_LITERAL(30, 695, 39), // "on_singleDeviceSweep_StartSwe..."
+QT_MOC_LITERAL(31, 735, 23), // "on_averageSweep_clicked"
+QT_MOC_LITERAL(32, 759, 20) // "on_contSweep_clicked"
 
     },
     "Widget\0closeEvent\0\0QCloseEvent*\0event\0"
@@ -72,13 +77,18 @@ QT_MOC_LITERAL(27, 569, 38) // "on_singleDeviceSweep_LaunchBt..."
     "on_btn_logout_clicked\0on_btn_littleshow_clicked\0"
     "on_pushButton_clicked\0on_pushButton_2_clicked\0"
     "on_pushButton_3_clicked\0on_pushButton_4_clicked\0"
-    "on_pushButton_5_clicked\0on_pushButton_6_clicked\0"
+    "on_pushButton_5_clicked\0"
+    "on_arbitrarySignalGenerate_LaunchBtn_clicked\0"
     "on_LTErunButton_clicked\0on_pushButton_7_clicked\0"
     "on_pushButton_8_clicked\0"
     "on_pushButton_20_clicked\0"
     "on_pushButton_19_clicked\0"
+    "on_equalSignalRx_clicked\0"
     "on_singleDeviceSweep_Button_clicked\0"
-    "on_singleDeviceSweep_LaunchBtn_clicked"
+    "on_singleDeviceSweep_LaunchBtn_clicked\0"
+    "on_singleDeviceSweep_TimeTestBtn_clicked\0"
+    "on_singleDeviceSweep_StartSweep_clicked\0"
+    "on_averageSweep_clicked\0on_contSweep_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -88,7 +98,7 @@ static const uint qt_meta_data_Widget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      23,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -96,33 +106,43 @@ static const uint qt_meta_data_Widget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  129,    2, 0x08 /* Private */,
-       5,    1,  132,    2, 0x08 /* Private */,
-       7,    0,  135,    2, 0x08 /* Private */,
-       8,    0,  136,    2, 0x08 /* Private */,
-       9,    0,  137,    2, 0x08 /* Private */,
-      10,    0,  138,    2, 0x08 /* Private */,
-      11,    0,  139,    2, 0x08 /* Private */,
-      12,    0,  140,    2, 0x08 /* Private */,
-      13,    0,  141,    2, 0x08 /* Private */,
-      14,    0,  142,    2, 0x08 /* Private */,
-      15,    0,  143,    2, 0x08 /* Private */,
-      16,    0,  144,    2, 0x08 /* Private */,
-      17,    0,  145,    2, 0x08 /* Private */,
-      18,    0,  146,    2, 0x08 /* Private */,
-      19,    0,  147,    2, 0x08 /* Private */,
-      20,    0,  148,    2, 0x08 /* Private */,
-      21,    0,  149,    2, 0x08 /* Private */,
-      22,    0,  150,    2, 0x08 /* Private */,
-      23,    0,  151,    2, 0x08 /* Private */,
-      24,    0,  152,    2, 0x08 /* Private */,
-      25,    0,  153,    2, 0x08 /* Private */,
-      26,    0,  154,    2, 0x08 /* Private */,
-      27,    0,  155,    2, 0x08 /* Private */,
+       1,    1,  154,    2, 0x08 /* Private */,
+       5,    1,  157,    2, 0x08 /* Private */,
+       7,    0,  160,    2, 0x08 /* Private */,
+       8,    0,  161,    2, 0x08 /* Private */,
+       9,    0,  162,    2, 0x08 /* Private */,
+      10,    0,  163,    2, 0x08 /* Private */,
+      11,    0,  164,    2, 0x08 /* Private */,
+      12,    0,  165,    2, 0x08 /* Private */,
+      13,    0,  166,    2, 0x08 /* Private */,
+      14,    0,  167,    2, 0x08 /* Private */,
+      15,    0,  168,    2, 0x08 /* Private */,
+      16,    0,  169,    2, 0x08 /* Private */,
+      17,    0,  170,    2, 0x08 /* Private */,
+      18,    0,  171,    2, 0x08 /* Private */,
+      19,    0,  172,    2, 0x08 /* Private */,
+      20,    0,  173,    2, 0x08 /* Private */,
+      21,    0,  174,    2, 0x08 /* Private */,
+      22,    0,  175,    2, 0x08 /* Private */,
+      23,    0,  176,    2, 0x08 /* Private */,
+      24,    0,  177,    2, 0x08 /* Private */,
+      25,    0,  178,    2, 0x08 /* Private */,
+      26,    0,  179,    2, 0x08 /* Private */,
+      27,    0,  180,    2, 0x08 /* Private */,
+      28,    0,  181,    2, 0x08 /* Private */,
+      29,    0,  182,    2, 0x08 /* Private */,
+      30,    0,  183,    2, 0x08 /* Private */,
+      31,    0,  184,    2, 0x08 /* Private */,
+      32,    0,  185,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -169,14 +189,19 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 12: _t->on_pushButton_3_clicked(); break;
         case 13: _t->on_pushButton_4_clicked(); break;
         case 14: _t->on_pushButton_5_clicked(); break;
-        case 15: _t->on_pushButton_6_clicked(); break;
+        case 15: _t->on_arbitrarySignalGenerate_LaunchBtn_clicked(); break;
         case 16: _t->on_LTErunButton_clicked(); break;
         case 17: _t->on_pushButton_7_clicked(); break;
         case 18: _t->on_pushButton_8_clicked(); break;
         case 19: _t->on_pushButton_20_clicked(); break;
         case 20: _t->on_pushButton_19_clicked(); break;
-        case 21: _t->on_singleDeviceSweep_Button_clicked(); break;
-        case 22: _t->on_singleDeviceSweep_LaunchBtn_clicked(); break;
+        case 21: _t->on_equalSignalRx_clicked(); break;
+        case 22: _t->on_singleDeviceSweep_Button_clicked(); break;
+        case 23: _t->on_singleDeviceSweep_LaunchBtn_clicked(); break;
+        case 24: _t->on_singleDeviceSweep_TimeTestBtn_clicked(); break;
+        case 25: _t->on_singleDeviceSweep_StartSweep_clicked(); break;
+        case 26: _t->on_averageSweep_clicked(); break;
+        case 27: _t->on_contSweep_clicked(); break;
         default: ;
         }
     }
@@ -211,13 +236,13 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 23)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 23;
+        _id -= 28;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 23)
+        if (_id < 28)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 23;
+        _id -= 28;
     }
     return _id;
 }

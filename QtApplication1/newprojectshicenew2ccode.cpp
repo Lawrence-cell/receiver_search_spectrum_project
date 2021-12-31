@@ -31,6 +31,9 @@
 // Arguments    : const creal_T data[100000]
 // Return Type  : double
 //
+
+
+
 double newprojectshicenew2ccode(const creal_T data[100000])
 {
   static coder::comm::RaisedCosineReceiveFilter rcrFilt;
@@ -307,14 +310,14 @@ double newprojectshicenew2ccode(const creal_T data[100000])
   if ((0.1 < rt_hypotd_snf(data11_tmp.re, data11_tmp.im)) || (F2 > 26.0)) {
     //              modulation = 'BPSK';
     modulation = 1.0;
-  } else if (F2 < 14.5) {
+  } else if (F2 < 14.6) {
     // 容易造成误判，QPSK可能会被判到QAM类里，但是如果降低门限，将16APSK划入PSK类里，利用F1可以将16APSK和8PSK划为一类 
     //          modulation2='QAM类(包括16APSK）';
     if (F1 < 0.04) {
       // 0.15改为0.03
       //          modulation='16APSK';
       modulation = 4.0;
-    } else if (F1 < 0.3) {
+    } else if (F1 < 0.35) {
       // 0.5改为0.05
       //              modulation='32QAM';
       modulation = 7.0;

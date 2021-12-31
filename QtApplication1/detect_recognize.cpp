@@ -53,7 +53,7 @@ int peak_detect(double Tao[80000]) {
         cut1[i] = Tao[i * 400 + 200];
     }
     for (int i = 0; i < 200; i++) {
-        if (cut1[i] >= 0.05) {
+        if (cut1[i] >= 0.09) {
             num_detect += 1;
         }
     }
@@ -71,6 +71,7 @@ int num1 = 0;
 creal_T dcv[200000];
 int modulation_c = 0;
 double flag = 0;
+
 
 
 void main_detect_recognize(int RecvData[], double R,int D, double* num, double* modulation,double FX[3],double Tao[80000]) {

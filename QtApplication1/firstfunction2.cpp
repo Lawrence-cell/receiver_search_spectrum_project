@@ -31,6 +31,7 @@
 // Arguments    : const creal_T data[200000]
 // Return Type  : double
 //
+
 double firstfunction2(const creal_T data[200000])
 {
   static creal_T b_data[200000];
@@ -404,7 +405,11 @@ double firstfunction2(const creal_T data[200000])
       if (kd >= 30.0) {
         //              modulation='4fsk';
         modulation2 = 9.0;
-      } else {
+      }
+      else if (kd <= 3) {
+          modulation2 = newprojectshicenew2ccode(*(creal_T(*)[100000]) & data[0]);
+      }
+      else {
         //              modulation='OQPSK';
         modulation2 = 5.0;
       }

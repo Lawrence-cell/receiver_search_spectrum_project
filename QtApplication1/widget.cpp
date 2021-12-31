@@ -31,7 +31,6 @@ short recv_data[6144000];
 //SOCKET SrSocket_1 = CreatSocket("192.168.1.48");
 //SOCKET SrSocket_2 = CreatSocket("192.168.1.49");
 
-
 typedef struct {
     int PCI;
     float Offset;
@@ -77,6 +76,7 @@ void Widget::initUi()
     shadow->setOffset(0, 0);
     shadow->setColor(QColor("#444444"));
     shadow->setBlurRadius(16);
+    
     ui->w_bg->setGraphicsEffect(shadow);
     //ui->lay_bg->setMargin(12);
 
@@ -167,33 +167,192 @@ void Widget::on_singleDeviceSweep_Button_clicked() {
     
 }
 
-void Widget::on_singleDeviceSweep_LaunchBtn_clicked() {
-    SOCKET Socket_0 = CreatSocket("192.168.1.49");
-    int start_f = ui->singleDeviceSweep_StartText->toPlainText().toInt();
-    int stop_f = ui->singleDeviceSweep_StopText->toPlainText().toInt();
-    int CF = (start_f + stop_f) / 2;
-    signalContent sigContent = SingleDeviceDetection(Socket_0, CF);
+
+void Widget::on_singleDeviceSweep_TimeTestBtn_clicked()
+{
+    int totaltime;
+    SOCKET SrSocket_0 = CreatSocket("192.168.1.48");
+    int startF = ui->singleDeviceSweep_StartText_3->toPlainText().toInt();
+    int stopF = ui->singleDeviceSweep_StopText_3->toPlainText().toInt();
+
+    ////精度很高的扫频 无法输出cf bw 扫频范围很大
+    //SingleSpectrumScan(SrSocket_0, startF, stopF, 3072);
+    //
+    
+    
+    totaltime = SingleSpectrumScan_2048(SrSocket_0, startF, stopF);
+    
+    ui->TimeTest_result->setText(QString("%1").arg(totaltime));
+    closesocket(SrSocket_0);
+}
 
 
+void Widget::on_equalSignalRx_clicked() {
+    cout << "equalSignal" << endl;
+    SOCKET Socket_0 = CreatSocket("192.168.1.48");
+    //**********************************************下为获取调制方式*****************************************************
+    int modulation = equalSignalGenerate_AMC(Socket_0);
+
+    
+    int outputType = 0;
+    string str2 = " ";
+    switch (modulation) {
+    case 0:
+        str2 = str2.append("AWGN");
+        outputType = 2; break;
+    case 1:
+        str2 = str2.append("BPSK"); break;
+    case 2:
+        str2 = str2.append("QPSK"); 
+        outputType = 3; break;
+    case 3:
+        str2 = str2.append("8PSK"); break;
+    case 4:
+        str2 = str2.append("16APSK"); break;
+    case 5:
+        str2 = str2.append("OQPSK"); break;
+    case 6:
+        str2 = str2.append("16QAM"); 
+        outputType = 4; break;
+    case 7:
+        str2 = str2.append("32QAM"); break;
+    case 8:
+        str2 = str2.append("2FSK"); break;
+    case 9:
+        str2 = str2.append("4FSK"); break;
+    case 10:
+        str2 = str2.append("8FSK"); break;
+    case 11:
+        str2 = str2.append("16FSK"); break;
+    case 12:
+        str2 = str2.append("16PSK"); break;
+    default:
+        std::cout << "modulation judge failed" << endl; break;
+    }
+    
+
+
+    signalContent sigContent = SingleDeviceDetection(Socket_0, 2000);
+    
+    
     float Left, Right, SigFreq, SigBand;
+    int BW;
+    int CF;
 
-    for (int j = 0; j < sigContent.SignalNumber; j = j + 2)
-    {
-        Left = float(sigContent.SignalEdge[j]) / 100.0;
-        Right = float(sigContent.SignalEdge[j + 1]) / 100.0;
-        SigFreq = (Right + Left) / 2 + CF - 10.0;
+    
+  
+
+    //**********************************************下为获取带宽和中心频点*****************************************************
+
+        Left = float(sigContent.SignalEdge[0]) / 100.0;
+        Right = float(sigContent.SignalEdge[1]) / 100.0;
+        SigFreq = (Right + Left) / 2 + 2000 - 10.0;
         SigBand = Right - Left;
 
         string str1 = "信号";
-        str1 = str1.append(std::to_string(j/2 +  1));
+        str1 = str1.append(std::to_string(1));
         str1 = str1.append(" ,  频点: ");//拼接字符串
         str1 = str1.append(std::to_string(SigFreq));//拼接字符串
+        CF = SigFreq;
         str1 = str1.append(" MHz, 带宽: ");//拼接字符串
+        BW = SigBand;
         str1 = str1.append(std::to_string(SigBand));//拼接字符串
-        str1 = str1.append(" MHz");//拼接字符串
-        ui->textBrowser_3->append(QString::fromStdString(str1));
-    }
+        str1 = str1.append(" MHz, 调制方式");//拼接字符串
+
+        str1 = str1.append(str2);
+        ui->textBrowser_4->append(QString::fromStdString(str1));
+
+
+    cout << "start send" << endl;
+    //**********************************************下为发送信号****************************************************
+    int bandwidth = BW;
+
+    cout << "BW:";
+    cout << bandwidth << endl;
+    cout << "CF:";
+    cout << CF << endl;
+    cout << "type";
+    cout << outputType << endl;
+    
+
+    int fs = ((bandwidth * 1000000) * 4) / 1.2;
+    SendSignel(Socket_0, fs, 20000000, CF, 50000, 3);
+    /*ui->textBrowser_4->append(QString::fromStdString("信号已发送"));*/
+    string str33 = " ";
+    str33.append("send success");
+    ui->textBrowser_4->append(QString::fromStdString(str33));
+    
+    closesocket(Socket_0);
+}
+
+
+
+void Widget::on_averageSweep_clicked() {
+    SOCKET Socket_0 = CreatSocket("192.168.1.47");
+    SOCKET Socket_1 = CreatSocket("192.168.1.48");
+    SOCKET Socket_2 = CreatSocket("192.168.1.49");
+
+    int startF = ui->textEdit_5->toPlainText().toInt();
+    int stopF = ui->textEdit_6->toPlainText().toInt();
+
+
+    MultiDeviceScanMix(Socket_0, Socket_1, Socket_2, startF, stopF, 3072);
+
+
+    closesocket(Socket_0);
+    closesocket(Socket_1);
+    closesocket(Socket_2);
+
+}
+
+void Widget::on_contSweep_clicked() {
+    SOCKET Socket_0 = CreatSocket("192.168.1.47");
+    SOCKET Socket_1 = CreatSocket("192.168.1.48");
+    SOCKET Socket_2 = CreatSocket("192.168.1.49");
+
+    int startF = ui->textEdit_11->toPlainText().toInt();
+    int stopF = ui->textEdit_16->toPlainText().toInt();
+    
+    MultiDeviceScanCont(Socket_0, Socket_1, Socket_2, startF, stopF, 3072);
+
+    closesocket(Socket_0);
+    closesocket(Socket_1);
+    closesocket(Socket_2);
+}
+
+
+void Widget::on_singleDeviceSweep_LaunchBtn_clicked() {
+    SOCKET Socket_0 = CreatSocket("192.168.1.48");
+    int start_f = ui->singleDeviceSweep_StartText->toPlainText().toInt();
+    int stop_f = ui->singleDeviceSweep_StopText->toPlainText().toInt();
+    int CF = (start_f + stop_f) / 2;
+
+    //**************************************注释 测试***********************************
+    //signalContent sigContent = SingleDeviceDetection(Socket_0, CF);
+
+
+    //float Left, Right, SigFreq, SigBand;
+
+    //for (int j = 0; j < sigContent.SignalNumber; j = j + 2)
+    //{
+    //    Left = float(sigContent.SignalEdge[j]) / 100.0;
+    //    Right = float(sigContent.SignalEdge[j + 1]) / 100.0;
+    //    SigFreq = (Right + Left) / 2 + CF - 10.0;
+    //    SigBand = Right - Left;
+
+    //    string str1 = "信号";
+    //    str1 = str1.append(std::to_string(j/2 +  1));
+    //    str1 = str1.append(" ,  频点: ");//拼接字符串
+    //    str1 = str1.append(std::to_string(SigFreq));//拼接字符串
+    //    str1 = str1.append(" MHz, 带宽: ");//拼接字符串
+    //    str1 = str1.append(std::to_string(SigBand));//拼接字符串
+    //    str1 = str1.append(" MHz");//拼接字符串
+    //    ui->textBrowser_3->append(QString::fromStdString(str1));
+    //}
     /*SingleSpectrumScan(Socket_0, CF - 10, CF + 10, 3072);*/
+    //*********************************************TEST WATERFALL*********************************************
+    collectOneTimeDate(Socket_0, start_f, stop_f);
+    //*********************************************************************************************************
     closesocket(Socket_0);
 }
 
@@ -229,10 +388,6 @@ void Widget::on_btn_main_item_5_clicked()
 void Widget::on_btn_main_item_6_clicked()
 {
     ui->sw_main->setCurrentIndex(6);
-   // SOCKET SrSocket_0 = CreatSocket("192.168.1.47");
-    
-   
-   
 }
 
 void Widget::on_btn_logout_clicked()
@@ -251,6 +406,8 @@ void Widget::on_pushButton_clicked() {
     func1();
    // ui->pushButton->setText("启动检测");
 }
+
+
 
 int Widget::func1() {
 
@@ -298,7 +455,7 @@ int Widget::func1() {
     int* RecvData = new int[200000];
 
 
-    SOCKET SrSocket_0 = CreatSocket("192.168.1.49");
+    SOCKET SrSocket_0 = CreatSocket("192.168.1.47");
 
 
     //测试
@@ -340,6 +497,8 @@ int Widget::func1() {
     Sleep(100);
     SetSampleBand(SrSocket_0, 20000000); //设置采样带宽20M
     Sleep(100);
+    SetGain(SrSocket_0, 40);
+    Sleep(1000);
 
 
     qDebug("loop begin"); 
@@ -351,14 +510,14 @@ int Widget::func1() {
         double num = 0;
         double modulation = 0;
         //short* recvdata = (short*)RecvData;                 //是否要int转short？
-        dll_detect_recognize(RecvData, R, D, &num, &modulation, FX[j], Tao);
+        main_detect_recognize(RecvData, R, D, &num, &modulation, FX[j], Tao);
         
         //销毁生成的数组
 
     
 
         //cout << "第" << j + 1 << "次采集数据检测结果为：" << endl;
-        if (D == 1) {
+        
 
             //qDebug() << "检测到" << num << "个信号" ;
             num = (int)num;
@@ -376,7 +535,7 @@ int Widget::func1() {
             //QDebug("xin hao ge shu pan jue zhi xin du %") << c1_temp * 100 << '%' << endl;
             qDebug() << "循环次数 j: " << j;
             
-            if (num == 1) //检测到信号
+            if (num != 0) //检测到信号
             {
                 
                 QString str5 = "检测到信号";
@@ -408,7 +567,7 @@ int Widget::func1() {
            
             //std::cout << "tiao zhi fang shi pan jue zhi xin du wei" << c2_temp * 100 << "%" << endl;
             //std::cout << "调制方式判决置信度为：" << c2_temp * 100 << '%' << endl;
-        }
+        
 
 
         Sleep(10);
@@ -430,46 +589,143 @@ int Widget::func1() {
     return 0;
 }
 
+
+
+
+
 void Widget::on_pushButton_2_clicked(){
-    flag = 1;
+    flag = 1;//正弦波
     qDebug()<<"flag is " << flag;
+    ui->label_14->setVisible(false);
+    ui->textEdit->setVisible(false);
 }
 
 void Widget::on_pushButton_3_clicked(){
-    flag = 2;
+    flag = 2;//AWGN
     qDebug() << "flag is " << flag;
+    ui->label_14->setVisible(false);
+    ui->textEdit->setVisible(false);
 }
 
 void Widget::on_pushButton_4_clicked(){
-    flag = 3;
+    flag = 3;//QPSK 
     qDebug() << "flag is " << flag;
+    ui->label_14->setVisible(true);
+    ui->textEdit->setVisible(true);
+}
+
+
+void Widget::on_singleDeviceSweep_StartSweep_clicked() {
+    SOCKET Socket_0 = CreatSocket("192.168.1.48");
+    int start_f = ui->singleDeviceSweep_StartText->toPlainText().toInt();
+    int stop_f = ui->singleDeviceSweep_StopText->toPlainText().toInt();
+   /* int CF = (start_f + stop_f) / 2;*///原来版本
+
+
+    int CF = start_f + 10;
+
+    int n = ( stop_f - start_f) / 20;
+    float Left, Right, SigFreq, SigBand;
+    
+    int catchtime = 0;
+    for (int i = 0; i < n; i++)
+    {
+        signalContent sigContent = scene1SweepFunc(Socket_0, CF);
+        
+       
+        for (int j = 0; j < sigContent.SignalNumber; j = j + 2)
+        {
+           
+           Left = float(sigContent.SignalEdge[j]) / 100.0;
+           Right = float(sigContent.SignalEdge[j + 1]) / 100.0;
+           SigFreq = (Right + Left) / 2 + CF - 10.0;
+           SigBand = Right - Left;
+           if (SigBand > 0.2)
+           {
+               if (SigBand <= 0.28)
+               {
+                   SigBand = 0.2;
+               }
+               if (SigBand > 15)
+               {
+                   SigBand = 20;
+               }
+               string str1 = "信号";
+               str1 = str1.append(std::to_string(catchtime + j / 2 + 1));
+               str1 = str1.append(" ,  频点: ");//拼接字符串
+               str1 = str1.append(std::to_string(SigFreq));//拼接字符串
+               str1 = str1.append(" MHz, 带宽: ");//拼接字符串
+               str1 = str1.append(std::to_string(SigBand));//拼接字符串
+               str1 = str1.append(" MHz");//拼接字符串
+               ui->textBrowser_3->append(QString::fromStdString(str1));
+           }
+        }
+        if (sigContent.SignalNumber != 0)
+        {
+            catchtime = catchtime + 1;
+        }
+        CF = CF + 20;
+    }
+    
+    //**************************************************原来版本****************************************************
+    //signalContent sigContent = SingleDeviceDetection(Socket_0, CF);
+
+
+    //float Left, Right, SigFreq, SigBand;
+
+    //for (int j = 0; j < sigContent.SignalNumber; j = j + 2)
+    //{
+    //    Left = float(sigContent.SignalEdge[j]) / 100.0;
+    //    Right = float(sigContent.SignalEdge[j + 1]) / 100.0;
+    //    SigFreq = (Right + Left) / 2 + CF - 10.0;
+    //    SigBand = Right - Left;
+
+    //    string str1 = "信号";
+    //    str1 = str1.append(std::to_string(j/2 +  1));
+    //    str1 = str1.append(" ,  频点: ");//拼接字符串
+    //    str1 = str1.append(std::to_string(SigFreq));//拼接字符串
+    //    str1 = str1.append(" MHz, 带宽: ");//拼接字符串
+    //    str1 = str1.append(std::to_string(SigBand));//拼接字符串
+    //    str1 = str1.append(" MHz");//拼接字符串
+    //    ui->textBrowser_3->append(QString::fromStdString(str1));
+    //}
+    /*SingleSpectrumScan(Socket_0, CF - 10, CF + 10, 3072);*/
+    //**************************************************原来版本****************************************************
+
+    closesocket(Socket_0);
 }
 
 void Widget::on_pushButton_5_clicked(){
-    flag = 4;
+    flag = 4;//16QAM
     qDebug() << "flag is " << flag;
+    ui->label_14->setVisible(true);
+    ui->textEdit->setVisible(true);
 }
 
-void Widget::on_pushButton_6_clicked() {
-     SOCKET SrSocket_2 = CreatSocket("192.168.1.49");
+void Widget::on_arbitrarySignalGenerate_LaunchBtn_clicked() {
+     SOCKET SrSocket_2 = CreatSocket("192.168.1.48");
     //转换成qstring 再转成 int
-    int fs = ui->textEdit->toPlainText().toInt();
-    int bandWidth = ui->textEdit_2->toPlainText().toInt();
+
+     //单位均为MHz
+    int bandWidth = ui->textEdit->toPlainText().toInt();
     int fc = ui->textEdit_3->toPlainText().toInt();
     int gain = ui->textEdit_4->toPlainText().toInt();
+    
+
+    int fs = ((bandWidth * 1000000) * 4) / 1.2;
     /*qDebug() << fs;
     qDebug() << fc;
     qDebug() << bandWidth;
     qDebug() << gain;*/
     //int d = atoi(->);
-    SendSignel(SrSocket_2, fs, bandWidth, fc, gain, flag);
+    SendSignel(SrSocket_2, fs, 20000000, fc, gain, flag);
    //SendSignel(SrSocket_0, 30720000, 20000000, 1000, 10000, 3);
     closesocket(SrSocket_2);
 }
 
 void Widget::on_LTErunButton_clicked(){
 
-    SOCKET SrSocket_0 = CreatSocket("192.168.1.49");
+    SOCKET SrSocket_0 = CreatSocket("192.168.1.47");
 
     ui->sw_main->setCurrentIndex(4);
  
@@ -507,11 +763,12 @@ void Widget::on_LTErunButton_clicked(){
 
     SetSampleRate(SrSocket_0, 30720000);
     Sleep(200);
-    SetGain(SrSocket_0, 20);
-    Sleep(200);
+    SetGain(SrSocket_0, 40);
+    Sleep(1000);
     SetRxFreq(SrSocket_0, CF_LTE);
     Sleep(200);
     //CaptureDataMs(SrSocket_0,  200, (char*)Recvdata2);
+    //**********************************************************************************************
     CaptureData(SrSocket_0, 3072000, (char*)Recvdata2);
  
     short* recv_data_tmp = (short*)Recvdata2;
@@ -521,7 +778,7 @@ void Widget::on_LTErunButton_clicked(){
         recv_data[i] = recv_data_tmp[i];
 
     }
-
+    //*************************************************************************************************
 
     int a;
     a = LTE_Identification(recv_data, &infoset_0);
@@ -568,10 +825,10 @@ void Widget::on_pushButton_8_clicked() {
     SOCKET SrSocket_1 = CreatSocket("192.168.1.48");
     SOCKET SrSocket_2 = CreatSocket("192.168.1.49");
     
-
+ 
     int ModulationFinal[3];
 
-    double* s = MultiDetectRecognize(SrSocket_0, SrSocket_1, SrSocket_2, 2000, 1, 1, ModulationFinal);
+    MultiDetectRecognize(SrSocket_0, SrSocket_1, SrSocket_2, 2000, 1, 1, ModulationFinal);
     //qDebug("test");
     string ModuList[13] = { "AWGN","BPSK","QPSK","8PSK","16APSK","OQPSK","16QAM","32QAM","2FSK","4FSK","8FSK","16FSK","16PSK" };
 
@@ -611,6 +868,8 @@ void Widget::on_pushButton_8_clicked() {
 
 void Widget::on_pushButton_20_clicked() {
     funcPage2();
+    /*ui->label_131->setText("3");
+    ui->label_134->setText("100.000000%");*/
 }
 
 int Widget::funcPage2() {
@@ -633,6 +892,7 @@ int Widget::funcPage2() {
     PLUSFUNC dll_detect_recognize = (PLUSFUNC)GetProcAddress(hDllInst, "main_detect_recognize");
 
 
+    
 
     double R = 0;           //使能调制方式识别功能，1为进行调制方式识别。
     int D = 1;
@@ -640,7 +900,7 @@ int Widget::funcPage2() {
     int* RecvData = new int[200000];
 
 
-    SOCKET SrSocket_0 = CreatSocket("192.168.1.49");
+    SOCKET SrSocket_0 = CreatSocket("192.168.1.47");
 
 
     //测试
@@ -657,7 +917,7 @@ int Widget::funcPage2() {
     //for (int i = 0; i < rows; ++i)
     //    *(FX + i) = b_1.allocate(cols);
 
-    double FX[50][3];
+    double FX[100][3]{};
     int out_N[4] = { 0,0,0,0 };
     int out_M[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
     int out_n = 0;
@@ -682,30 +942,32 @@ int Widget::funcPage2() {
     Sleep(100);
     SetSampleBand(SrSocket_0, 20000000); //设置采样带宽20M
     Sleep(100);
+    SetGain(SrSocket_0, 40);
+    Sleep(1000);
 
 
 
     qDebug("loop begin");
     for (int j = 0; j < CYC_1; j++) {
-
         CaptureData(
             SrSocket_0, NUM,
             (char*)RecvData); //第二个入参是采集的点数，这个数需要是2048的整数倍，第三个入参是数据保存的数组地址
         double num = 0;
         double modulation = 0;
         //short* recvdata = (short*)RecvData;                 //是否要int转short？
-        dll_detect_recognize(RecvData, R, D, &num, &modulation, FX[j], Tao);
+        main_detect_recognize (RecvData, R, D, &num, &modulation, FX[j], Tao);
 
         //销毁生成的数组
-
-
-
+        cout << FX[j][0] << endl << FX[j][1] << endl << FX[j][2] << endl;
+         
+                                          
         //cout << "第" << j + 1 << "次采集数据检测结果为：" << endl;
-        if (D == 1) {
+       
 
             //qDebug() << "检测到" << num << "个信号" ;
             num = (int)num;
-            ui->label_131->setText(QString("%1").arg(num));
+           
+            
             out_N[int(num)] += 1;
             out_n_temp = Max_index(out_N, 4);
             c1_temp = double(out_N[out_n_temp]) / (j + 1);
@@ -717,7 +979,7 @@ int Widget::funcPage2() {
             ui->label_134->setText(QString::fromStdString(str1));// string -> Qstring
             //QDebug("xin hao ge shu pan jue zhi xin du %") << c1_temp * 100 << '%' << endl;
             qDebug() << "循环次数 j: " << j;
-        }
+        
        
             //string str2 = std::to_string(c2_temp * 100);//double -> string
             //str2 = str2.append("%");//拼接字符串
@@ -730,6 +992,7 @@ int Widget::funcPage2() {
         Sleep(10);
         std::cout << endl;
     }
+    ui->label_131->setText(QString("%1").arg(out_n_temp));
     /*for (int i = 0; i < rows; ++i)
     {
         for (int j = 0; j < cols; ++j)
@@ -753,26 +1016,9 @@ void Widget::on_pushButton_19_clicked() {
 
 int Widget::funcPage3() {
     double CYC_1 = ui->spinBox_5->text().toDouble();
-
-    HINSTANCE hDllInst;
-    hDllInst = LoadLibrary(L"Dll1.dll"); //调用DLL
-    if (hDllInst == NULL)
-    {
-        qDebug("loaddll failed!");
-        return -1;
-    }
-    else
-    {
-        qDebug("loaddll success!");
-    }
-    typedef void (*PLUSFUNC)(int RecvData[], double R, int D, double* num, double* modulation, double FX[3], double Tao[80000]);
-    PLUSFUNC dll_detect_recognize = (PLUSFUNC)GetProcAddress(hDllInst, "main_detect_recognize");
-
-
-
+    int out_m[13]{};
     double R = 1;           //使能调制方式识别功能，1为进行调制方式识别。
     int D = 0;
-
     int* RecvData = new int[200000];
 
 
@@ -797,7 +1043,7 @@ int Widget::funcPage3() {
     int out_N[4] = { 0,0,0,0 };
     int out_M[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
     int out_n = 0;
-    int out_m = 0;
+   /* int out_m = 0;*/
     int out_n_temp = 0;
     int out_m_temp = 0;
     double c1_temp = 0, c2_temp = 0;
@@ -818,7 +1064,10 @@ int Widget::funcPage3() {
     Sleep(100);
     SetSampleBand(SrSocket_0, 20000000); //设置采样带宽20M
     Sleep(100);
-
+    SetGain(SrSocket_0, 50);
+    Sleep(1000);
+   /* SetFreqAndGain(SrSocket_0, 2000, 40);
+    Sleep(100);*/
 
 
     qDebug("loop begin");
@@ -830,57 +1079,59 @@ int Widget::funcPage3() {
         double num = 0;
         double modulation = 0;
         //short* recvdata = (short*)RecvData;                 //是否要int转short？
-        dll_detect_recognize(RecvData, R, D, &num, &modulation, FX[j], Tao);
+        main_detect_recognize(RecvData, R, D, &num, &modulation, FX[j], Tao);
 
         //销毁生成的数组
 
         //cout << "第" << j + 1 << "次采集数据检测结果为：" << endl;
-        if (R == 1) {
-            out_M[int(modulation)] += 1;
-            out_m_temp = Max_index(out_M, 13);
-            c2_temp = double(out_M[out_m_temp]) / (j + 1);
-            qDebug() << "调制方式" << modulation;
-            switch (int(modulation)) {
-            case 0:
-                ui->label_124->setText("AWGN"); break;
-            case 1:
-                ui->label_124->setText("BPSK"); break;
-            case 2:
-                ui->label_124->setText("QPSK"); break;
-            case 3:
-                ui->label_124->setText("8PSK"); break;
-            case 4:
-                ui->label_124->setText("16APSK"); break;
-            case 5:
-                ui->label_124->setText("OQPSK"); break;
-            case 6:
-                ui->label_124->setText("16QAM"); break;
-            case 7:
-                ui->label_124->setText("32QAM"); break;
-            case 8:
-                ui->label_124->setText("2FSK"); break;
-            case 9:
-                ui->label_124->setText("4FSK"); break;
-            case 10:
-                ui->label_124->setText("8FSK"); break;
-            case 11:
-                ui->label_124->setText("16FSK"); break;
-            case 12:
-                ui->label_124->setText("16PSK"); break;
-            default:
-                std::cout << "modulation judge failed" << endl; break;
-
-            }
-            string str2 = std::to_string(c2_temp * 100);//double -> string
-            str2 = str2.append("%");//拼接字符串
-            ui->label_130->setText(QString::fromStdString(str2));
-            //std::cout << "tiao zhi fang shi pan jue zhi xin du wei" << c2_temp * 100 << "%" << endl;
-            //std::cout << "调制方式判决置信度为：" << c2_temp * 100 << '%' << endl;
-        }
-
-
+        
+        out_M[int(modulation)] += 1;
+        out_m_temp = Max_index(out_M, 13);
+        c2_temp = double(out_M[out_m_temp]) / (j + 1);
+        qDebug() << "调制方式" << modulation;
+            
+        
+        
+        //std::cout << "tiao zhi fang shi pan jue zhi xin du wei" << c2_temp * 100 << "%" << endl;
+        //std::cout << "调制方式判决置信度为：" << c2_temp * 100 << '%' << endl;
+        
         Sleep(10);
         std::cout << endl;
+    }
+    string str2 = std::to_string(c2_temp * 100);//double -> string
+    str2 = str2.append("%");//拼接字符串
+    ui->label_130->setText(QString::fromStdString(str2));
+
+    switch (out_m_temp) {
+    case 0:
+        ui->label_124->setText("AWGN"); break;
+    case 1:
+        ui->label_124->setText("BPSK"); break;
+    case 2:
+        ui->label_124->setText("QPSK"); break;
+    case 3:
+        ui->label_124->setText("8PSK"); break;
+    case 4:
+        ui->label_124->setText("16APSK"); break;
+    case 5:
+        ui->label_124->setText("OQPSK"); break;
+    case 6:
+        ui->label_124->setText("16QAM"); break;
+    case 7:
+        ui->label_124->setText("32QAM"); break;
+    case 8:
+        ui->label_124->setText("2FSK"); break;
+    case 9:
+        ui->label_124->setText("4FSK"); break;
+    case 10:
+        ui->label_124->setText("8FSK"); break;
+    case 11:
+        ui->label_124->setText("16FSK"); break;
+    case 12:
+        ui->label_124->setText("16PSK"); break;
+    default:
+        std::cout << "modulation judge failed" << endl; break;
+
     }
     /*for (int i = 0; i < rows; ++i)
     {
@@ -931,7 +1182,6 @@ void Widget::Paint()
     painter.translate(450, 450);
     painter.drawPath(path);
 }
-
 
 
 

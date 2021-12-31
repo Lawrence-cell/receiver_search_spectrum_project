@@ -84,4 +84,19 @@ signalContent SingleDeviceDetection(SOCKET clntSock, float Freq);
 
 void SingleDetectRecognize(SOCKET clntSock, float freq,double R,int D);
 
-double * MultiDetectRecognize(SOCKET clntSock_0, SOCKET clntSock_1, SOCKET clntSock_2, float freq, double R, int D,int ModulationFinal[3]);
+void MultiDetectRecognize(SOCKET clntSock_0, SOCKET clntSock_1, SOCKET clntSock_2, float freq, double R, int D,int ModulationFinal[3]);
+
+void collectOneTimeDate(SOCKET clntSock, int Begin, int End);
+
+template<class T, class V = int>
+void plot_dynamic(T* x, int N1, int start, int end, int showTime, V* y = NULL, bool equal = false);
+
+void CaptureData_2048(SOCKET clntSock, int64_t Begin, int64_t End, char* RxBuffer);
+
+int SingleSpectrumScan_2048(SOCKET clntSock, int Begin, int End);
+
+int equalSignalGenerate_AMC(SOCKET Socket_0);
+
+signalContent scene1SweepFunc(SOCKET clntSock, float Freq);
+
+signalContent SignalDetection_noPlot(double* input, float Freq);

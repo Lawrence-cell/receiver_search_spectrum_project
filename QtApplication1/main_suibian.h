@@ -26,6 +26,8 @@ void detect_recognize(const creal_T data[200000], double choose, double* num,
 
 void main_detect_recognize(int RecvData[], double R, int D, double* num, double* modulation,double FX[3],double Tao[80000]);
 
+void main_detect_recognize_new(int RecvData[], double R, int D, double* num, double* modulation, double FX[3], double Tao[80000]);
+
 void write_hang(double Tao[80000]);
 
 void write_matrix(double FX[CYC][3]);

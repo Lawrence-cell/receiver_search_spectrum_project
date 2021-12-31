@@ -26,7 +26,7 @@
 
 #define TH4 0.05
 #define TH8 0.12
-#define TH10 0.25
+#define TH10 0.11
 
 // Function Definitions
 //
