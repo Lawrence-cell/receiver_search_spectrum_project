@@ -81,12 +81,12 @@ void Widget::initUi()
     //ui->lay_bg->setMargin(12);
 
     //Logo
-    QPixmap logo(":/icons/logo.png");
+    QPixmap logo("icons/logo.png");
     ui->lab_logo->setPixmap(logo);
 
     //itemLogo
-    QPixmap item1(":/icons/item_01.png");
-    QPixmap item2(":/icons/item_02.png");
+    QPixmap item1("icons/item_01.png");
+    QPixmap item2("icons/item_02.png");
 //    ui->lab_item_01->setPixmap(item1);
 //    ui->lab_item_02->setPixmap(item2);
 
@@ -105,7 +105,7 @@ void Widget::initMember()
     connect(myMbox,SIGNAL(btnchicked(int)),this,SLOT(changeMboxReturn(int)));
 
     //最小化到托盘
-    QIcon icon = QIcon(":/icons/logo.png");//设置最小图标
+    QIcon icon = QIcon("icons/logo.png");//设置最小图标
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(icon);
     trayIcon->setToolTip("Peach"); //提示文字
@@ -117,7 +117,7 @@ void Widget::initMember()
     quitAction = new QAction(" Quit", this);
     quitAction->setFont(QFont("Arial", 9));
     quitAction->setObjectName("quitAction");
-    quitAction->setIcon(QIcon(":/icons/out.png"));
+    quitAction->setIcon(QIcon("icons/out.png"));
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));           //绑定槽函数退出
     connect(returnNormal, SIGNAL(triggered()), this, SLOT(showNormal()));   //绑定槽函数还原界面
 

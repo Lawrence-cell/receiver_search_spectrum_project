@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 
 
     //加载样式表
-    QFile file("C:/Users/yangguang/source/repos/QtApplication1V1/QtApplication1/css/index.css");
+    QFile file("css/index.css");
     if (file.open(QFile::ReadOnly)) {
 
         QString qss = QLatin1String(file.readAll());

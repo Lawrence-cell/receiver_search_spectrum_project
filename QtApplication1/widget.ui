@@ -10,6 +10,12 @@
     <height>685</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>1030</width>
@@ -91,7 +97,6 @@
            <property name="font">
             <font>
              <pointsize>10</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -163,8 +168,6 @@
           </property>
           <property name="font">
            <font>
-            <family>Adobe Devanagari</family>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -198,8 +201,6 @@
           </property>
           <property name="font">
            <font>
-            <family>Adobe Devanagari</family>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -227,9 +228,7 @@
           </property>
           <property name="font">
            <font>
-            <family>Adobe Devanagari</family>
             <pointsize>34</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -248,9 +247,7 @@
           </property>
           <property name="font">
            <font>
-            <family>Adobe Devanagari</family>
             <pointsize>12</pointsize>
-            <weight>50</weight>
             <bold>false</bold>
            </font>
           </property>
@@ -275,8 +272,6 @@
           </property>
           <property name="font">
            <font>
-            <family>Adobe Devanagari</family>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -340,7 +335,6 @@
           <widget class="QPushButton" name="singleDeviceSweep_Button">
            <property name="font">
             <font>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -366,7 +360,6 @@
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -406,7 +399,6 @@ image: url(:/css/index.css);</string>
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -440,7 +432,6 @@ image: url(:/css/index.css);</string>
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -474,7 +465,6 @@ image: url(:/css/index.css);</string>
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -508,7 +498,6 @@ image: url(:/css/index.css);</string>
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -542,7 +531,6 @@ image: url(:/css/index.css);</string>
            <property name="font">
             <font>
              <pointsize>9</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -577,33 +565,30 @@ image: url(:/css/index.css);</string>
             <widget class="QWidget" name="widget" native="true">
              <property name="font">
               <font>
-               <weight>50</weight>
                <bold>false</bold>
               </font>
              </property>
              <widget class="QWidget" name="widget_44" native="true">
               <property name="geometry">
                <rect>
-                <x>80</x>
+                <x>70</x>
                 <y>110</y>
-                <width>791</width>
+                <width>851</width>
                 <height>231</height>
                </rect>
               </property>
               <widget class="QLabel" name="label_2">
                <property name="geometry">
                 <rect>
-                 <x>-40</x>
+                 <x>-50</x>
                  <y>20</y>
-                 <width>251</width>
+                 <width>261</width>
                  <height>41</height>
                 </rect>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -650,9 +635,7 @@ image: url(:/css/index.css);</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -663,17 +646,15 @@ image: url(:/css/index.css);</string>
               <widget class="QLabel" name="label_12">
                <property name="geometry">
                 <rect>
-                 <x>-40</x>
+                 <x>0</x>
                  <y>90</y>
-                 <width>251</width>
+                 <width>211</width>
                  <height>41</height>
                 </rect>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -723,9 +704,7 @@ image: url(:/css/index.css);</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -739,17 +718,15 @@ image: url(:/css/index.css);</string>
               <widget class="QLabel" name="label_7">
                <property name="geometry">
                 <rect>
-                 <x>500</x>
+                 <x>403</x>
                  <y>150</y>
-                 <width>64</width>
+                 <width>161</width>
                  <height>22</height>
                 </rect>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -771,9 +748,7 @@ image: url(:/css/index.css);</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
-                 <weight>50</weight>
                  <bold>false</bold>
                 </font>
                </property>
@@ -801,7 +776,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -823,7 +797,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -845,7 +818,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -867,7 +839,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -889,7 +860,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -933,7 +903,6 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
             </font>
            </property>
@@ -957,9 +926,7 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -981,10 +948,8 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -1005,10 +970,8 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -1029,9 +992,7 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -1053,10 +1014,8 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -1102,10 +1061,8 @@ image: url(:/css/index.css);</string>
            </property>
            <property name="font">
             <font>
-             <family>Adobe Devanagari</family>
              <pointsize>12</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
+             <bold>false</bold>
             </font>
            </property>
            <property name="text">
@@ -1845,7 +1802,6 @@ image: url(:/css/index.css);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1883,7 +1839,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_33">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1905,7 +1860,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_34">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1936,7 +1890,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_36">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -1970,7 +1923,6 @@ image: url(:/css/index.css);</string>
                <widget class="QWidget" name="widget_21" native="true">
                 <property name="font">
                  <font>
-                  <family>Adobe Devanagari</family>
                   <pointsize>12</pointsize>
                  </font>
                 </property>
@@ -1979,7 +1931,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_38">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>10</pointsize>
                     </font>
                    </property>
@@ -1995,7 +1946,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_39">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -2011,7 +1961,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_40">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -2027,7 +1976,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_41">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -2166,7 +2114,6 @@ image: url(:/css/index.css);</string>
                   <widget class="QLabel" name="label_48">
                    <property name="font">
                     <font>
-                     <family>Adobe Devanagari</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
@@ -2189,15 +2136,14 @@ image: url(:/css/index.css);</string>
              <widget class="QPushButton" name="LTErunButton">
               <property name="geometry">
                <rect>
-                <x>430</x>
-                <y>42</y>
-                <width>75</width>
+                <x>390</x>
+                <y>40</y>
+                <width>141</width>
                 <height>41</height>
                </rect>
               </property>
               <property name="font">
                <font>
-                <family>Adobe Devanagari</family>
                 <pointsize>12</pointsize>
                </font>
               </property>
@@ -2800,15 +2746,14 @@ image: url(:/css/index.css);</string>
                  <widget class="QLabel" name="singleDeviceSweep_StartLbl">
                   <property name="geometry">
                    <rect>
-                    <x>70</x>
+                    <x>40</x>
                     <y>30</y>
-                    <width>121</width>
+                    <width>151</width>
                     <height>22</height>
                    </rect>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Adobe Devanagari</family>
                     <pointsize>12</pointsize>
                    </font>
                   </property>
@@ -2844,9 +2789,9 @@ image: url(:/css/index.css);</string>
                  <widget class="QLabel" name="singleDeviceSweep_Stopbl">
                   <property name="geometry">
                    <rect>
-                    <x>70</x>
+                    <x>40</x>
                     <y>80</y>
-                    <width>121</width>
+                    <width>151</width>
                     <height>22</height>
                    </rect>
                   </property>
@@ -2864,7 +2809,6 @@ image: url(:/css/index.css);</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Adobe Devanagari</family>
                     <pointsize>12</pointsize>
                    </font>
                   </property>
@@ -2908,7 +2852,6 @@ image: url(:/css/index.css);</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Adobe Devanagari</family>
                     <pointsize>12</pointsize>
                    </font>
                   </property>
@@ -2927,7 +2870,6 @@ image: url(:/css/index.css);</string>
                   </property>
                   <property name="font">
                    <font>
-                    <family>Adobe Devanagari</family>
                     <pointsize>12</pointsize>
                    </font>
                   </property>
@@ -2973,15 +2915,14 @@ image: url(:/css/index.css);</string>
                <widget class="QLabel" name="singleDeviceSweep_StartLbl_3">
                 <property name="geometry">
                  <rect>
-                  <x>80</x>
+                  <x>50</x>
                   <y>30</y>
-                  <width>111</width>
+                  <width>141</width>
                   <height>22</height>
                  </rect>
                 </property>
                 <property name="font">
                  <font>
-                  <family>Adobe Devanagari</family>
                   <pointsize>12</pointsize>
                  </font>
                 </property>
@@ -3017,9 +2958,9 @@ image: url(:/css/index.css);</string>
                <widget class="QLabel" name="singleDeviceSweep_Stopbl_3">
                 <property name="geometry">
                  <rect>
-                  <x>80</x>
+                  <x>50</x>
                   <y>80</y>
-                  <width>111</width>
+                  <width>141</width>
                   <height>22</height>
                  </rect>
                 </property>
@@ -3037,7 +2978,6 @@ image: url(:/css/index.css);</string>
                 </property>
                 <property name="font">
                  <font>
-                  <family>Adobe Devanagari</family>
                   <pointsize>12</pointsize>
                  </font>
                 </property>
@@ -3081,7 +3021,6 @@ image: url(:/css/index.css);</string>
                 </property>
                 <property name="font">
                  <font>
-                  <family>Adobe Devanagari</family>
                   <pointsize>12</pointsize>
                  </font>
                 </property>
@@ -3093,15 +3032,14 @@ image: url(:/css/index.css);</string>
               <widget class="QLabel" name="singleDeviceSweep_StartLbl_4">
                <property name="geometry">
                 <rect>
-                 <x>470</x>
+                 <x>460</x>
                  <y>90</y>
-                 <width>161</width>
+                 <width>191</width>
                  <height>31</height>
                 </rect>
                </property>
                <property name="font">
                 <font>
-                 <family>Adobe Devanagari</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>

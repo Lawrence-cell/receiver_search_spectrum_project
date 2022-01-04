@@ -61,10 +61,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\yangguang\source\repos\QtApplication1\QtApplication1\fftw;C:\Users\yangguang\source\repos\QtApplication1\QtApplication1\fftw-3.3.5-dll64;D:\python39\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\WTI_X1C\Desktop\Receiver_sweep_project\receiver_search_spectrum_project\QtApplication1\fftw;C:\Users\WTI_X1C\Desktop\Receiver_sweep_project\receiver_search_spectrum_project\QtApplication1\fftw-3.3.5-dll64;C:\python39\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>D:\python39\libs;C:\Users\yangguang\source\repos\QtApplication1V1\QtApplication1\fftw;C:\Users\yangguang\source\repos\QtApplication1V1\QtApplication1\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\python39\libs;C:\Users\WTI_X1C\Desktop\Receiver_sweep_project\receiver_search_spectrum_project\QtApplication1\fftw;C:\Users\WTI_X1C\Desktop\Receiver_sweep_project\receiver_search_spectrum_project\QtApplication1\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>python39.lib;libfftw3-3.lib
 ;libfftw3f-3.lib;
 libfftw3l-3.lib;
